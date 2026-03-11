@@ -1,5 +1,6 @@
 using Godot;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models;
@@ -47,6 +48,9 @@ public static class KeyboardCardPlayPatch
                 target = TargetSelector.GetBestTarget(card, targetType);
             }
 
+            // 取消鼠标拖拽的异步流程，防止出牌后 LerpToMouse 报错
+            cardPlay._cancellationTokenSource?.Cancel();
+
             // 设置目标并尝试出牌（通过 Publicize 直接访问）
             cardPlay._target = target;
             cardPlay.TryPlayCard(target);
@@ -72,5 +76,29 @@ public static class KeyboardCardPlayPatch
             TargetType.AnyAlly => true,
             _ => false
         };
+    }
+}
+
+/// <summary>
+/// 记录出牌目标（所有出牌方式：鼠标/键盘/控制器）
+/// </summary>
+[HarmonyPatch(typeof(NCardPlay), nameof(NCardPlay.TryPlayCard))]
+public static class FocusTargetPatch
+{
+    static void Postfix(Creature target)
+    {
+        TargetSelector.RecordTarget(target);
+    }
+}
+
+/// <summary>
+/// 战斗结束时清空集火记录
+/// </summary>
+[HarmonyPatch(typeof(CombatManager), nameof(CombatManager.EndCombatInternal))]
+public static class CombatResetPatch
+{
+    static void Postfix()
+    {
+        TargetSelector.Reset();
     }
 }

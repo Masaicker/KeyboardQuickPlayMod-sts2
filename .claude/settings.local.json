@@ -6,7 +6,9 @@
       "mcp__serena__search_for_pattern",
       "mcp__serena__check_onboarding_performed",
       "mcp__serena__list_memories",
-      "mcp__exa__web_search_exa"
+      "mcp__exa__web_search_exa",
+      "mcp__serena__find_symbol",
+      "mcp__serena__get_symbols_overview"
     ]
   }
 }

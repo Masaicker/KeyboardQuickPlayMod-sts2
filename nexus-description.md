@@ -7,7 +7,7 @@
 [list]
 [*][b]一键出牌[/b]：选中卡牌后按空格键，无需鼠标拖拽或点击目标
 [*][b]智能场景[/b]：无需选择目标，单一目标、全体攻击等场景瞬间打出
-[*][b]默认选择[/b]：多目标时自动选血量最低（最优选仍需手动选择）
+[*][b]智能目标[/b]：自动攻击上次攻击的敌人，首次攻击或目标死亡时选血量最低的敌人；队友技能默认选血量最低的队友
 [*][b]自定义按键[/b]：支持键盘按键和鼠标按键，通过配置文件修改
 [*][b]无缝兼容[/b]：不影响原有鼠标操作
 [/list]
@@ -69,7 +69,7 @@ Slay the Spire 2/
 [list]
 [*][b]One-Click Play[/b]: Select a card and press Space — no mouse dragging or clicking required
 [*][b]Smart Scenarios[/b]: Instantly plays cards with no target, single target, or AoE attacks
-[*][b]Default Targeting[/b]: Auto-selects lowest-HP in multi-target scenarios (manual selection optimal)
+[*][b]Smart Targeting[/b]: Auto-attacks the last targeted enemy; selects lowest-HP enemy on first attack or when the target dies. Ally skills default to the lowest-HP ally
 [*][b]Custom Key Binding[/b]: Supports keyboard keys and mouse buttons via config file
 [*][b]Seamless Integration[/b]: Doesn't affect original mouse controls
 [/list]
