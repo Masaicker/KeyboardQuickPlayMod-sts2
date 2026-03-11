@@ -45,7 +45,7 @@ public static class TargetSelector
     public static void Reset()
     {
         if (DebugLog)
-            Plugin.Logger.Info($"[集火] 战斗结束，清空目标! 之前: {(_focusTarget != null ? _focusTarget.Name : "无")}");
+            Plugin.Logger.Info($"[集火] 战斗开始/结束/重置时，清空目标! 之前: {(_focusTarget != null ? _focusTarget.Name : "无")}");
         _focusTarget = null;
     }
 
@@ -56,7 +56,7 @@ public static class TargetSelector
         if (enemies.Count == 1) return enemies[0];
 
         // 集火优先：上次打过的目标还活着就继续打
-        if (_focusTarget != null && _focusTarget.IsHittable && enemies.Contains(_focusTarget))
+        if (_focusTarget != null && enemies.Contains(_focusTarget) && _focusTarget.IsHittable)
         {
             if (DebugLog)
                 Plugin.Logger.Info($"[集火] 复用目标: {_focusTarget.Name} (HP:{_focusTarget.CurrentHp}/{_focusTarget.MaxHp})");
@@ -65,7 +65,7 @@ public static class TargetSelector
 
         if (DebugLog)
         {
-            var reason = _focusTarget == null ? "无集火目标" : !_focusTarget.IsHittable ? "目标已死" : "目标不在列表中";
+            var reason = _focusTarget == null ? "无集火目标" : !enemies.Contains(_focusTarget) ? "目标不在列表中" : !_focusTarget.IsHittable ? "目标已死" : "未知";
             Plugin.Logger.Info($"[集火] 回退到最低血量 ({reason})");
         }
 

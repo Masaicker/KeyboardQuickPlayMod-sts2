@@ -92,10 +92,23 @@ public static class FocusTargetPatch
 }
 
 /// <summary>
-/// 战斗结束时清空集火记录
+/// 战斗结束或被清理时清空集火记录
 /// </summary>
 [HarmonyPatch(typeof(CombatManager), nameof(CombatManager.EndCombatInternal))]
+[HarmonyPatch(typeof(CombatManager), nameof(CombatManager.Reset))]
 public static class CombatResetPatch
+{
+    static void Postfix()
+    {
+        TargetSelector.Reset();
+    }
+}
+
+/// <summary>
+/// 战斗开始时也确保清空旧的集火记录
+/// </summary>
+[HarmonyPatch(typeof(CombatManager), nameof(CombatManager.SetUpCombat))]
+public static class CombatStartPatch
 {
     static void Postfix()
     {
