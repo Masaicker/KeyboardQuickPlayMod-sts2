@@ -4,7 +4,7 @@
 
 ## 功能特性
 
-- **一键出牌**：选中卡牌后按空格键，无需鼠标拖拽或点击目标
+- **一键出牌**：选中卡牌后按空格键，无需鼠标拖拽或点击目标；按住不放可在选牌时连续打出
 - **智能场景**：无需选择目标，单一目标、全体攻击等场景瞬间打出
 - **智能目标**：自动攻击上次攻击的敌人，首次攻击或目标死亡时选血量最低的敌人；队友技能默认选血量最低的队友
 - **自定义按键**：支持键盘按键和鼠标按键，通过配置文件修改
@@ -67,7 +67,7 @@ Select a card and press Space to play it instantly. Supports custom key bindings
 
 ## Features
 
-- **One-Click Play**: Select a card and press Space — no mouse dragging or clicking required
+- **One-Click Play**: Select a card and press Space — no mouse dragging or clicking required; hold the key to play cards continuously as you select them
 - **Smart Scenarios**: Instantly plays cards with no target, single target, or AoE attacks
 - **Smart Targeting**: Auto-attacks the last targeted enemy; selects lowest-HP enemy on first attack or when the target dies. Ally skills default to the lowest-HP ally
 - **Custom Key Binding**: Supports keyboard keys and mouse buttons via config file
