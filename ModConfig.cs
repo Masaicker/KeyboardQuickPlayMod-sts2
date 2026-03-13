@@ -13,11 +13,26 @@ public static class ModConfig
 
     private static Key? _key;
     private static MouseButton? _mouseButton;
+    public static bool DebugLog = false;
 
     public static bool IsMatch(InputEvent inputEvent)
     {
-        if (_key.HasValue && inputEvent is InputEventKey { Pressed: true } keyEvent && keyEvent.Keycode == _key.Value)
-            return true;
+        if (inputEvent is InputEventKey { Pressed: true } keyEvent)
+        {
+            if (DebugLog)
+                Plugin.Logger.Info($"[诊断] 收到按键: Keycode={keyEvent.Keycode}, PhysicalKeycode={keyEvent.PhysicalKeycode}, Unicode={keyEvent.Unicode}, Echo={keyEvent.Echo}");
+
+            if (_key.HasValue && keyEvent.Keycode == _key.Value)
+                return true;
+
+            // Fallback: 输入法可能导致 Keycode 为 None，用 PhysicalKeycode 兜底
+            if (_key.HasValue && keyEvent.Keycode == Key.None && keyEvent.PhysicalKeycode == _key.Value)
+            {
+                if (DebugLog)
+                    Plugin.Logger.Info($"[诊断] Keycode 为 None，PhysicalKeycode 命中: {keyEvent.PhysicalKeycode}");
+                return true;
+            }
+        }
 
         if (_mouseButton.HasValue && inputEvent is InputEventMouseButton { Pressed: true } mouseEvent && mouseEvent.ButtonIndex == _mouseButton.Value)
             return true;

@@ -52,6 +52,8 @@ Slay the Spire 2/
 
 本项目基于 [url=https://github.com/Alchyr/ModTemplate-StS2]Alchyr/ModTemplate-StS2[/url] 模板创建。
 
+特别感谢玩家 [url=https://www.nexusmods.com/profile/Kishibukukuuuu]Kishibukukuuuu[/url] 协助排查跨环境兼容性问题。
+
 [size=5][b]许可证[/b][/size]
 
 本项目遵循原游戏的 MOD 许可政策。
@@ -110,6 +112,8 @@ Change the [b]QuickPlayButton[/b] value to rebind:
 [size=5][b]Acknowledgments[/b][/size]
 
 This project is based on the [url=https://github.com/Alchyr/ModTemplate-StS2]Alchyr/ModTemplate-StS2[/url] template.
+
+Special thanks to player [url=https://www.nexusmods.com/profile/Kishibukukuuuu]Kishibukukuuuu[/url] for helping debug cross-environment compatibility issues.
 
 [size=5][b]License[/b][/size]
 

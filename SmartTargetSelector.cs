@@ -11,7 +11,6 @@ namespace KeyboardQuickPlay;
 /// </summary>
 public static class TargetSelector
 {
-    private static bool DebugLog = false;
     private static Creature _focusTarget;
 
     public static Creature GetBestTarget(CardModel card, TargetType targetType)
@@ -35,7 +34,7 @@ public static class TargetSelector
         if (target == null) return;
         var old = _focusTarget;
         _focusTarget = target;
-        if (DebugLog)
+        if (ModConfig.DebugLog)
             Plugin.Logger.Info($"[集火] 记录目标: {target.Name} (HP:{target.CurrentHp}/{target.MaxHp}) | 上一个: {(old != null ? old.Name : "无")}");
     }
 
@@ -44,7 +43,7 @@ public static class TargetSelector
     /// </summary>
     public static void Reset()
     {
-        if (DebugLog)
+        if (ModConfig.DebugLog)
             Plugin.Logger.Info($"[集火] 战斗开始/结束/重置时，清空目标! 之前: {(_focusTarget != null ? _focusTarget.Name : "无")}");
         _focusTarget = null;
     }
@@ -58,12 +57,12 @@ public static class TargetSelector
         // 集火优先：上次打过的目标还活着就继续打
         if (_focusTarget != null && enemies.Contains(_focusTarget) && _focusTarget.IsHittable)
         {
-            if (DebugLog)
+            if (ModConfig.DebugLog)
                 Plugin.Logger.Info($"[集火] 复用目标: {_focusTarget.Name} (HP:{_focusTarget.CurrentHp}/{_focusTarget.MaxHp})");
             return _focusTarget;
         }
 
-        if (DebugLog)
+        if (ModConfig.DebugLog)
         {
             var reason = _focusTarget == null ? "无集火目标" : !enemies.Contains(_focusTarget) ? "目标不在列表中" : !_focusTarget.IsHittable ? "目标已死" : "未知";
             Plugin.Logger.Info($"[集火] 回退到最低血量 ({reason})");
