@@ -128,19 +128,12 @@ try {
     Write-Host "[$step/$totalSteps] Copying to mods folder..." -ForegroundColor Yellow
     if (!(Test-Path $ModsDir)) { New-Item -ItemType Directory -Path $ModsDir | Out-Null }
 
-    # 动态生成 manifest：根据实际选择设置 has_pck
-    $outManifest = @{
-        id                = $manifest.id
-        name              = $manifest.name
-        author            = $manifest.author
-        description       = $manifest.description
-        version           = $manifest.version
-        has_dll           = $hasDll
-        has_pck           = $includePck
-        dependencies      = @($manifest.dependencies | Where-Object { $_ })
-        affects_gameplay  = [bool]$manifest.affects_gameplay
-    }
-    $outManifest | ConvertTo-Json -Depth 10 | Set-Content "$ModsDir/$ModId.json" -Encoding UTF8
+    # 动态生成 manifest：读取原始 JSON，替换 has_pck，去掉旧字段
+    $jsonText = [System.IO.File]::ReadAllText($ManifestPath, [System.Text.Encoding]::UTF8)
+    $jsonText = $jsonText -replace '"pck_name"\s*:\s*"[^"]*"\s*,?\s*\n?', ''
+    $hasPckStr = if ($includePck) { 'true' } else { 'false' }
+    $jsonText = $jsonText -replace '"has_pck"\s*:\s*(true|false)', "`"has_pck`": $hasPckStr"
+    [System.IO.File]::WriteAllText("$ModsDir/$ModId.json", $jsonText.Trim() + "`n", [System.Text.Encoding]::UTF8)
 
     if ($hasDll) {
         Copy-Item "$ProjectDir/bin/publish/$ModName.dll" "$ModsDir/$ModName.dll" -Force
