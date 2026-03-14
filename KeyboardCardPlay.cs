@@ -19,7 +19,10 @@ public static class KeyboardCardPlayPatch
     /// </summary>
     static void Postfix(NMouseCardPlay __instance, InputEvent inputEvent)
     {
-        if (!ModConfig.IsMatch(inputEvent)) return;
+        // 原有逻辑：收到热键事件时触发
+        // 新增逻辑：任意事件进来时，如果热键物理按住也触发（解决跨回合 echo 中断）
+        if (!ModConfig.IsMatch(inputEvent) && !ModConfig.IsHeld())
+            return;
 
         if (TryPlayWithKeyboard(__instance))
         {

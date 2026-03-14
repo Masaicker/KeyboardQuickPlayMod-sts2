@@ -19,24 +19,29 @@ public static class ModConfig
     {
         if (inputEvent is InputEventKey { Pressed: true } keyEvent)
         {
-            if (DebugLog)
-                Plugin.Logger.Info($"[诊断] 收到按键: Keycode={keyEvent.Keycode}, PhysicalKeycode={keyEvent.PhysicalKeycode}, Unicode={keyEvent.Unicode}, Echo={keyEvent.Echo}");
-
             if (_key.HasValue && keyEvent.Keycode == _key.Value)
                 return true;
 
             // Fallback: 输入法可能导致 Keycode 为 None，用 PhysicalKeycode 兜底
             if (_key.HasValue && keyEvent.Keycode == Key.None && keyEvent.PhysicalKeycode == _key.Value)
-            {
-                if (DebugLog)
-                    Plugin.Logger.Info($"[诊断] Keycode 为 None，PhysicalKeycode 命中: {keyEvent.PhysicalKeycode}");
                 return true;
-            }
         }
 
         if (_mouseButton.HasValue && inputEvent is InputEventMouseButton { Pressed: true } mouseEvent && mouseEvent.ButtonIndex == _mouseButton.Value)
             return true;
 
+        return false;
+    }
+
+    /// <summary>
+    /// 轮询物理按键状态（不依赖事件流，解决跨回合 echo 中断问题）
+    /// </summary>
+    public static bool IsHeld()
+    {
+        if (_key.HasValue && Input.IsKeyPressed(_key.Value))
+            return true;
+        if (_mouseButton.HasValue && Input.IsMouseButtonPressed(_mouseButton.Value))
+            return true;
         return false;
     }
 
