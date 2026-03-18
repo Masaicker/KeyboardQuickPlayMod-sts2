@@ -14,20 +14,20 @@
 
 [size=5][b]安装[/b][/size]
 
-1. 将 [b]KeyboardQuickPlay.dll[/b] 和 [b]KeyboardQuickPlay.pck[/b] 复制到游戏目录下的 [b]mods[/b] 文件夹：
+1. 将 [b]KeyboardQuickPlay.dll[/b] 和 [b]KeyboardQuickPlay.json[/b] 复制到游戏目录下的 [b]mods[/b] 文件夹：
 
 [code]
 Slay the Spire 2/
 └── mods/
     ├── KeyboardQuickPlay.dll
-    └── KeyboardQuickPlay.pck
+    └── KeyboardQuickPlay.json
 [/code]
 
 2. 启动游戏，MOD 会自动加载
 
 [size=5][b]自定义按键[/b][/size]
 
-首次启动后会自动生成配置文件 [b]mods/config/KeyboardQuickPlay.json[/b]：
+首次启动后会自动生成配置文件 [b]mods/config/KeyboardQuickPlay.cfg[/b]：
 
 [code]
 {
@@ -45,7 +45,7 @@ Slay the Spire 2/
 
 [list]
 [*]使用 Harmony 库进行运行时 Patch
-[*]支持通过 JSON 配置文件自定义按键
+[*]支持通过配置文件自定义按键
 [/list]
 
 [size=5][b]致谢[/b][/size]
@@ -79,20 +79,20 @@ Slay the Spire 2/
 
 [size=5][b]Installation[/b][/size]
 
-1. Copy [b]KeyboardQuickPlay.dll[/b] and [b]KeyboardQuickPlay.pck[/b] to the [b]mods[/b] folder in your game directory:
+1. Copy [b]KeyboardQuickPlay.dll[/b] and [b]KeyboardQuickPlay.json[/b] to the [b]mods[/b] folder in your game directory:
 
 [code]
 Slay the Spire 2/
 └── mods/
     ├── KeyboardQuickPlay.dll
-    └── KeyboardQuickPlay.pck
+    └── KeyboardQuickPlay.json
 [/code]
 
 2. Launch the game — the mod will load automatically
 
 [size=5][b]Custom Key Binding[/b][/size]
 
-A config file [b]mods/config/KeyboardQuickPlay.json[/b] is auto-generated on first launch:
+A config file [b]mods/config/KeyboardQuickPlay.cfg[/b] is auto-generated on first launch:
 
 [code]
 {
@@ -110,7 +110,7 @@ Change the [b]QuickPlayButton[/b] value to rebind:
 
 [list]
 [*]Uses the Harmony library for runtime patching
-[*]Supports custom key binding via JSON config file
+[*]Supports custom key binding via config file
 [/list]
 
 [size=5][b]Acknowledgments[/b][/size]

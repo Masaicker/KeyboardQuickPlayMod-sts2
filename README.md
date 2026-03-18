@@ -12,22 +12,22 @@
 
 ## 安装
 
-1. 将 `KeyboardQuickPlay.dll` 和 `KeyboardQuickPlay.pck` 复制到游戏目录下的 `mods` 文件夹：
+1. 将 `KeyboardQuickPlay.dll` 和 `KeyboardQuickPlay.json` 复制到游戏目录下的 `mods` 文件夹：
 
    ```
    Slay the Spire 2/
    └── mods/
        ├── KeyboardQuickPlay.dll
-       └── KeyboardQuickPlay.pck
+       └── KeyboardQuickPlay.json
    ```
 
 2. 启动游戏，MOD 会自动加载
 
 ## 自定义按键
 
-首次启动后会自动生成配置文件 `mods/config/KeyboardQuickPlay.json`：
+首次启动后会自动生成配置文件 `mods/config/KeyboardQuickPlay.cfg`：
 
-```json
+```cfg
 {
   "QuickPlayButton": "Space"
 }
@@ -40,7 +40,7 @@
 ## 技术实现
 
 - 使用 Harmony 库进行运行时 Patch
-- 支持通过 JSON 配置文件自定义按键
+- 支持通过配置文件自定义按键
 
 ## 致谢
 
@@ -75,22 +75,22 @@ Select a card and press Space to play it instantly. Supports custom key bindings
 
 ## Installation
 
-1. Copy `KeyboardQuickPlay.dll` and `KeyboardQuickPlay.pck` to the `mods` folder in your game directory:
+1. Copy `KeyboardQuickPlay.dll` and `KeyboardQuickPlay.json` to the `mods` folder in your game directory:
 
    ```
    Slay the Spire 2/
    └── mods/
        ├── KeyboardQuickPlay.dll
-       └── KeyboardQuickPlay.pck
+       └── KeyboardQuickPlay.json
    ```
 
 2. Launch the game, the mod will load automatically
 
 ## Custom Key Binding
 
-A config file `mods/config/KeyboardQuickPlay.json` is auto-generated on first launch:
+A config file `mods/config/KeyboardQuickPlay.cfg` is auto-generated on first launch:
 
-```json
+```cfg
 {
   "QuickPlayButton": "Space"
 }
@@ -103,7 +103,7 @@ Change the `QuickPlayButton` value to rebind:
 ## Technical Details
 
 - Uses Harmony library for runtime patching
-- Supports custom key binding via JSON config file
+- Supports custom key binding via config file
 
 ## Acknowledgments
 
