@@ -1,5 +1,9 @@
 # Changelog
 
+# v1.0.7
+* 优化项目构建配置
+* Update project build configuration
+
 # v1.0.5
 * 修复键盘结束回合后，长按快捷键无法继续自动出牌的问题
 * Fix auto-play not working after ending turn with keyboard while holding hotkey
