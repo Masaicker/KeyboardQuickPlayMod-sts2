@@ -1,6 +1,7 @@
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Events;
+using MegaCrit.Sts2.Core.Nodes.Events;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Screens.Overlays;
 
@@ -9,68 +10,53 @@ namespace KeyboardQuickPlay.Handlers;
 public partial class EventInputHandler : Node
 {
     private NEventRoom _room;
-
     public void Init(NEventRoom room)
     {
         _room = room;
         ProcessMode = ProcessModeEnum.Always;
     }
-public override void _UnhandledInput(InputEvent @event)
-{
-    if (!Helpers.IsTopScreen(_room))
-        return;
-
-    if (@event is not InputEventKey keyEvent)
-        return;
-
-    if (!keyEvent.Pressed || keyEvent.Echo)
-        return;
-
-    var options = GetOptions();
-    if (options.Count == 0)
-        return;
-
-    if (keyEvent.Keycode == Key.Space)
+    public override void _UnhandledInput(InputEvent @event)
     {
-        if (options.Count == 1 || options[0].IsProceed)
-        {
-            Trigger(options[0], 0);
+        if (!Helpers.IsTopScreen(_room))
             return;
+
+        if (@event is not InputEventKey keyEvent)
+            return;
+
+        if (!keyEvent.Pressed || keyEvent.Echo)
+            return;
+
+        var options = _room.Layout.OptionButtons.ToList();
+        
+        if (options.Count == 0)
+            return;
+
+        if (keyEvent.Keycode == Key.Space)
+        {
+            if (options.Count == 1)
+            {
+                Trigger(options.ElementAt(0));
+                return;
+            }
         }
+
+        int index = Helpers.KeyToIndex(keyEvent.Keycode);
+        if (index < 0 || index >= options.Count)
+            return;
+
+        Trigger(options.ElementAt(index));
     }
-
-    int index = Helpers.KeyToIndex(keyEvent.Keycode);
-    if (index < 0 || index >= options.Count)
-        return;
-
-    Trigger(options[index], index);
-}
 
     #region Helpers
 
-    private List<EventOption> GetOptions()
+    private static void Trigger(NEventOptionButton option)
     {
-        var evt = Traverse.Create(_room)
-            .Field("_event")
-            .GetValue<object>();
-
-        if (evt == null)
-            return new();
-
-        var options = Traverse.Create(evt)
-            .Property("CurrentOptions")
-            .GetValue<IReadOnlyList<EventOption>>();
-
-        return options != null ? new List<EventOption>(options) : new();
-    }
-
-    private void Trigger(EventOption option, int index)
-    {
-        if (option.IsLocked)
+        if (!option.IsEnabled)
             return;
 
-        var method = AccessTools.Method(typeof(NEventRoom), "OptionButtonClicked");
-        method.Invoke(_room, new object[] { option, index });
+        option.GrabFocus();
+        option.OnPress();
+        option.OnRelease();
     }
 
     #endregion
