@@ -35,13 +35,8 @@ public partial class RestSiteHandler : Node
             if (proceed == null)
                 return;
 
-            GD.Print($"[Hotkey][RestSite] Proceed enabled: {proceed.IsEnabled}");
-
             if (proceed.IsEnabled)
             {
-                GD.Print("[Hotkey][RestSite] Triggering proceed");
-
-                // Call actual method
                 var method = AccessTools.Method(typeof(NRestSiteRoom), "OnProceedButtonReleased");
                 method?.Invoke(_room, new object[] { null });
             }
@@ -75,6 +70,5 @@ public partial class RestSiteHandler : Node
 
         selectedButton.Call(NRestSiteButton.MethodName.OnPress);
         selectedButton.Call(NRestSiteButton.MethodName.OnRelease);
-
     }
 }

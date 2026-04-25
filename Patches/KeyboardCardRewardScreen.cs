@@ -11,8 +11,8 @@ public static class NCardRewardsScreen_AddHotkeyControl
 {
     static void Postfix(NCardRewardSelectionScreen __instance)
     {
-        var node = new CardRewardInputHandler(__instance);
-        node.Name = "RewardsHotkeyControl";
+        var node = new CardRewardHandler(__instance);
+        node.Name = "CardRewardHandler";
 
         __instance.AddChild(node);
     }
