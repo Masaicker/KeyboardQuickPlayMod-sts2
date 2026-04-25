@@ -1,10 +1,4 @@
 using Godot;
-using HarmonyLib;
-using System.Collections.Generic;
-using System.Linq;
-using MegaCrit.Sts2.Core.Nodes.Cards.Holders;
-using KeyboardQuickPlay;
-using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
 using MegaCrit.Sts2.Core.Nodes.Screens.ScreenContext;
 using MegaCrit.Sts2.Core.Nodes.Screens.Overlays;
 
@@ -33,9 +27,5 @@ public static class Helpers
     public static bool IsTopScreen(IScreenContext instance)
     {
         return ActiveScreenContext.Instance?.IsCurrent(instance) ?? false;
-    }
-    public static bool IsTopOverlay(IOverlayScreen instance)
-    {
-        return NOverlayStack.Instance?.Peek()  == instance;
     }
 }
