@@ -25,7 +25,15 @@ public partial class MainMenuInputHandler : Node
         if (@event is not InputEventKey key || !key.Pressed || key.Echo)
             return;
 
-        int index = Helpers.KeyToIndex(key.Keycode);
+        int index;    
+        if (key.Keycode == Key.Space)
+        {
+            index = 0;
+        }
+        else
+        {
+            index = Helpers.KeyToIndex(key.Keycode);
+        }
 
         if (index < 0)
             return;

@@ -6,13 +6,13 @@ using MegaCrit.Sts2.Core.Nodes.Screens.Overlays;
 
 namespace KeyboardQuickPlay.Handlers;
 
-public partial class CardRewardInputHandler : Node
+public partial class CardRewardHandler : Node
 {
     private readonly NCardRewardSelectionScreen _screen;
 
     private Control _cardRow;
 
-    public CardRewardInputHandler(NCardRewardSelectionScreen screen)
+    public CardRewardHandler(NCardRewardSelectionScreen screen)
     {
         _screen = screen;
     }
