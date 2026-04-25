@@ -12,7 +12,7 @@ public static class NMainMenu_Ready_Patch
 {
     static void Postfix(NMainMenu __instance)
     {
-        var handler = new MainMenuInputHandler();
+        var handler = new MainMenuHandler();
         handler.Name = "HotkeyHandler";
 
         __instance.AddChild(handler);

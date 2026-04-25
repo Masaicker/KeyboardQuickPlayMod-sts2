@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.Nodes.Screens.Overlays;
 using MegaCrit.Sts2.Core.Nodes.Screens.ScreenContext;
 
 namespace KeyboardQuickPlay.Handlers;
-public partial class MainMenuInputHandler : Node
+public partial class MainMenuHandler : Node
 {
     private NMainMenu _menu;
 
